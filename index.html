@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>IDDA Log Governor — Public Report</title>
+  <style>
+    :root {
+      --bg-main: #06111f;
+      --bg-gradient-a: #071a33;
+      --bg-gradient-b: #0b2447;
+      --card-bg: rgba(10, 31, 58, 0.94);
+      --card-border: rgba(125, 211, 252, 0.22);
+      --text-main: #e5f2ff;
+      --text-muted: #9fb7d5;
+      --accent-2: #22d3ee;
+      --accent-green: #34d399;
+      --accent-yellow: #facc15;
+      --pre-text: #bfffe2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.20), transparent 34%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 30%),
+        linear-gradient(135deg, var(--bg-gradient-a), var(--bg-main) 50%, var(--bg-gradient-b));
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.48;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 42px 56px 30px 56px;
+      border-bottom: 1px solid rgba(125, 211, 252, 0.18);
+      background: linear-gradient(180deg, rgba(8, 24, 47, 0.94), rgba(8, 24, 47, 0.48));
+      backdrop-filter: blur(8px);
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 38px;
+      letter-spacing: -0.03em;
+      color: #f8fbff;
+    }
+
+    header p {
+      margin: 4px 0;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    main {
+      padding: 34px 48px 60px 48px;
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-box {
+      background: linear-gradient(180deg, rgba(15, 45, 82, 0.96), rgba(8, 27, 52, 0.96));
+      border: 1px solid rgba(125, 211, 252, 0.20);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero-box .label {
+      color: var(--text-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .hero-box .value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--accent-2);
+      background: rgba(34, 211, 238, 0.10);
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0 0 16px 0;
+      color: #f8fbff;
+      font-size: 23px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      color: #d8e8fa;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: linear-gradient(180deg, #020817, #07111f);
+      color: var(--pre-text);
+      padding: 20px;
+      border-radius: 14px;
+      overflow-x: auto;
+      font-size: 13px;
+      border: 1px solid rgba(52, 211, 153, 0.18);
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      font-size: 14px;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+    }
+
+    th, td {
+      border-bottom: 1px solid rgba(125, 211, 252, 0.14);
+      padding: 12px 14px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(14, 54, 96, 0.78);
+      color: #dff6ff;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    td {
+      background: rgba(5, 20, 39, 0.40);
+      color: #e5f2ff;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .name-cell {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .metric-good {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .metric-class {
+      color: var(--accent-yellow);
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.10);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 8px;
+    }
+
+    .small-note {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    footer {
+      padding: 24px 48px 40px 48px;
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1000px) {
+      .hero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main {
+        padding: 24px;
+      }
+
+      header {
+        padding: 32px 24px 24px 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>IDDA Log Governor — Public PoC Report</h1>
+    <p>Public-safe version. Internal patterns, raw examples, class IDs and implementation details are intentionally omitted.</p>
+  </header>
+
+  <main>
+    <section class="hero-grid">
+      <div class="hero-box">
+        <div class="label">Benchmark scale</div>
+        <div class="value">50M lines</div>
+      </div>
+      <div class="hero-box">
+        <div class="label">Observed throughput</div>
+        <div class="value">~62–70k/s</div>
+      </div>
+      <div class="hero-box">
+        <div class="label">Live Docker run</div>
+        <div class="value">7.5M events</div>
+      </div>
+      <div class="hero-box">
+        <div class="label">Audit model</div>
+        <div class="value">Class-level</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-label">executive view</div>
+      <h2>What this public report shows</h2>
+      <p>
+        <span class="badge">deterministic stream processing</span>
+        <span class="badge">profile-based normalization</span>
+        <span class="badge">decision classes</span>
+        <span class="badge">class-level audit</span>
+        <span class="badge">Docker live stream</span>
+        <span class="badge">local synthetic benchmark</span>
+      </p>
+      <p>
+        This public-safe report summarizes a local IDDA Log Governor PoC.
+        It shows how noisy telemetry streams can be reduced into compact,
+        auditable decision classes without storing every raw event as an equal operational fact.
+      </p>
+      <p>
+        The emphasis is architectural: same decision core, different normalization profiles,
+        different operational granularity.
+      </p>
+    </section>
+
+    
+    <section class="card">
+      <div class="section-label">public summary</div>
+      <h2>Telemetry Reduction Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Stream / Profile</th>
+            <th>Input</th>
+            <th>Retained</th>
+            <th>Suppressed</th>
+            <th>Suppression</th>
+            <th>Decision Classes</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="name-cell">Industrial telemetry — PoC run</td>
+          <td>750,000</td>
+          <td>74,750</td>
+          <td>675,250</td>
+          <td class="metric-good">90.03%</td>
+          <td class="metric-class">3</td>
+        </tr>
+        
+        <tr>
+          <td class="name-cell">Industrial telemetry — Docker live run</td>
+          <td>7,500,000</td>
+          <td>750,287</td>
+          <td>6,749,713</td>
+          <td class="metric-good">90.00%</td>
+          <td class="metric-class">3</td>
+        </tr>
+        
+        <tr>
+          <td class="name-cell">API telemetry — detailed profile</td>
+          <td>100,000</td>
+          <td>15,000</td>
+          <td>85,000</td>
+          <td class="metric-good">85.00%</td>
+          <td class="metric-class">19</td>
+        </tr>
+        
+        <tr>
+          <td class="name-cell">API telemetry — compact profile</td>
+          <td>100,000</td>
+          <td>15,000</td>
+          <td>85,000</td>
+          <td class="metric-good">85.00%</td>
+          <td class="metric-class">5</td>
+        </tr>
+        
+        </tbody>
+      </table>
+      <p class="small-note">
+        Public-safe view: raw examples, exact event patterns, class IDs and implementation details are intentionally omitted.
+      </p>
+    </section>
+    
+
+    
+    <section class="card">
+      <div class="section-label">docker live run</div>
+      <h2>Docker Live Industrial Stream</h2>
+      <pre>Docker live industrial telemetry run:
+
+Input lines:          7,500,000
+Retained lines:       750,287
+Suppressed lines:     6,749,713
+Suppression ratio:    90.00%
+Decision classes:     3
+
+Interpretation:
+A multi-million-event live stream was reduced into a small number of repeated decision classes.
+The audit remained class-level, not full per-line storage.</pre>
+      <p class="small-note">
+        Public-safe summary. No raw event patterns or internal class identifiers are shown.
+      </p>
+    </section>
+    
+
+    <section class="card">
+      <div class="section-label">core result</div>
+      <h2>Public-safe architecture summary</h2>
+      <pre>Raw telemetry stream
+    ↓
+Normalization profile
+    ↓
+Repeated event classes
+    ↓
+Severity mapping
+    ↓
+Decision mapping
+    ↓
+Class-level audit
+
+The decision core remains stable.
+The profile controls the granularity of the operational view.</pre>
+    </section>
+
+    
+    <section class="card">
+      <div class="section-label">throughput</div>
+      <h2>Local Throughput Benchmark</h2>
+      <pre>benchmark_50M.txt:
+  Lines processed:  50,000,000
+  Unique classes:   948
+  Elapsed seconds:  799.9232
+  Lines / second:   62,506
+
+benchmark_quick.txt:
+  Lines processed:  1,000,000
+  Unique classes:   948
+  Elapsed seconds:  15.7713
+  Lines / second:   63,406
+</pre>
+      <p class="small-note">
+        Local synthetic benchmark. Not a production guarantee.
+      </p>
+    </section>
+    
+
+    <section class="card">
+      <div class="section-label">positioning</div>
+      <h2>Interpretation</h2>
+      <p>
+        IDDA Log Governor is not positioned as a replacement for observability platforms.
+        It is a deterministic decision layer that can sit before heavier storage,
+        alerting or analytics tools.
+      </p>
+      <p>
+        Its role is to reduce noisy telemetry into compact, decision-ready signals.
+      </p>
+      <p class="small-note">
+        All results shown here are local synthetic PoC results and should not be treated as production guarantees.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    IDDA Log Governor — public-safe PoC report.
+  </footer>
+</body>
+</html>
