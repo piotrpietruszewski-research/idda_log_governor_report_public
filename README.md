@@ -27,3 +27,9 @@ The materials are provided for viewing and discussion only.
 
 See `LICENSE` for details.
 
+## FAQ
+
+A public FAQ is available here:
+
+```text
+docs/FAQ_PUBLIC.md
