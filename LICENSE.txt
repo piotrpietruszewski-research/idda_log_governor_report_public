@@ -1,0 +1,26 @@
+IDDA Log Governor — Public Artifact License
+==========================================
+
+Copyright (c) 2026 Piotr Pietruszewski.
+All rights reserved.
+
+This repository contains public-facing documentation and report artifacts related to the IDDA Log Governor proof-of-concept.
+
+Permission is granted to view, read, share links to, and reference the materials in this repository for informational and discussion purposes.
+
+No permission is granted to:
+
+- copy, modify, remix, or redistribute the materials as a derivative work,
+- use the materials for commercial purposes without written permission,
+- represent the materials as your own work,
+- extract or reconstruct implementation logic from the materials,
+- use the materials to create a competing implementation,
+- use the IDDA name, terminology, diagrams, reports, benchmarks, or descriptions in a way that implies endorsement, partnership, or ownership.
+
+The materials are provided for informational purposes only.
+
+The benchmark and PoC results are local synthetic results and are not production guarantees.
+
+No warranty is provided, express or implied.
+
+For licensing, partnership, PoC access, or commercial use, contact the author.
