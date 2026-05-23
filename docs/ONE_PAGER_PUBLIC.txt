@@ -1,0 +1,96 @@
+IDDA Log Governor
+=================
+
+Deterministic decision layer for noisy telemetry streams.
+
+What it does
+------------
+
+IDDA Log Governor reduces noisy telemetry streams into compact, auditable decision classes.
+
+Instead of treating every raw log line as an equal operational fact, it groups repeated event patterns, assigns severity, maps them to decision classes, and writes a compact class-level audit.
+
+Core flow
+---------
+
+Raw telemetry stream
+    ↓
+Normalization profile
+    ↓
+Repeated event classes
+    ↓
+Severity mapping
+    ↓
+Decision mapping
+    ↓
+Class-level audit
+
+Key idea
+--------
+
+Raw logs are not the same as operational meaning.
+
+A large telemetry stream does not need every line to remain equally loud.
+
+It needs to show:
+
+- what repeated,
+- how often it repeated,
+- how severe it was,
+- what decision should follow,
+- and how that decision can be audited.
+
+Public PoC evidence
+-------------------
+
+Local throughput benchmark:
+
+- 50,000,000 log lines processed
+- approximately 62,500 lines/s
+- 948 normalized classes
+- local synthetic benchmark, not a production guarantee
+
+Docker live industrial stream:
+
+- 7,500,000 live telemetry events
+- 750,287 retained decision-relevant events
+- 6,749,713 suppressed events
+- 90.00% suppression
+- 3 decision classes
+
+API telemetry profile comparison:
+
+- detailed profile: 19 decision classes
+- compact profile: 5 decision classes
+
+Audit model
+-----------
+
+The audit is class-level, not full per-line storage.
+
+Each class-level audit can preserve:
+
+- class count,
+- global count,
+- severity,
+- decision,
+- normalized event class,
+- representative example.
+
+Positioning
+-----------
+
+IDDA Log Governor is not positioned as a replacement for observability platforms.
+
+It is a deterministic decision layer that can sit before heavier storage, alerting, or analytics tools.
+
+Its role is to reduce noisy telemetry into compact, auditable, decision-ready signals.
+
+Important note
+--------------
+
+All results are local synthetic PoC results.
+
+They are not production guarantees.
+
+A real deployment would still require ingestion design, buffering, source tagging, monitoring, retention rules, access control, failover, and production validation.
