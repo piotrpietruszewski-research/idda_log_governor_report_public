@@ -19,3 +19,11 @@ It does **not** contain:
 - class IDs,
 - private implementation details.
 
+- ## License
+
+This repository is published as a public-safe artifact repository.
+
+The materials are provided for viewing and discussion only.
+
+See `LICENSE` for details.
+
