@@ -19,9 +19,3 @@ It does **not** contain:
 - class IDs,
 - private implementation details.
 
-## Open the public report
-
-Open:
-
-```text
-index.html
