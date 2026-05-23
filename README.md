@@ -1,35 +1,27 @@
-IDDA Log Governor — Public-Safe Artifact Pack
-============================================
+# IDDA Log Governor — Public PoC Report
 
-This folder contains public-safe artifacts for the IDDA Log Governor PoC.
+Public-safe artifact repository for the IDDA Log Governor PoC.
 
-Included files:
+This repository contains only public-facing materials:
 
-1. IDDA_LOG_GOVERNOR_REPORT_PUBLIC.html
-   Public-safe HTML report.
-   No raw logs, no class IDs, no internal patterns, no implementation details.
+- public HTML report,
+- one-page public summary,
+- Docker live industrial telemetry test summary,
+- API profile comparison notes.
 
-2. README_DOCKER_LIVE_FACTORY_TEST.txt
-   Summary of the Docker live industrial telemetry test.
+It does **not** contain:
 
-3. README_DOCKER_PARALLEL_TEST.txt
-   Summary of the Docker parallel stress test, if available.
+- source code,
+- raw logs,
+- JSONL audit files,
+- Docker runners,
+- internal event patterns,
+- class IDs,
+- private implementation details.
 
-4. README_POC.txt
-   General PoC description.
+## Open the public report
 
-5. README_PROFILE_COMPARISON.txt
-   Public-safe profile comparison notes, if available.
+Open:
 
-Important note:
-
-These are local synthetic PoC results.
-They are not production guarantees.
-
-The purpose is to demonstrate:
-
-- deterministic stream processing,
-- profile-based normalization,
-- reduction into decision classes,
-- class-level audit,
-- telemetry compression before downstream observability/storage.
+```text
+index.html
