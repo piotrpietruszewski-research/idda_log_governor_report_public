@@ -1,1 +1,0 @@
-# idda_log_governor_report_public
